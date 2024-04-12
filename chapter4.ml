@@ -57,27 +57,10 @@ let product_right lst = List.fold_right ( *. ) lst 1.0
 (********************************************************************
  * exercise: sum_cube_odd
  ********************************************************************)
-
-(* returns:  [from i j l] is the list containing the integers from
- *   [i] to [j], inclusive, followed by the list [l].
- * example:  [from 1 3 [0] = [1;2;3;0]] *)
-let rec from i j l =
-  if i>j then l
-  else from i (j-1) (j::l)
-
-(* returns:  [i -- j] is the list containing the integers from
- *   [i] to [j], inclusive.
-*)
-let (--) i j =
-  from i j []
-
-(* returns: sum of the cubes of all odd numbers up to and including [n].
-*)
+ (*this code does note uses rec *)
 let sum_cube_odd n =
-  let l = 0 -- n in
-  let odds_only = List.filter (fun i -> i mod 2 = 1) l in
-  let odd_cubes = List.map (fun i -> i * i * i) odds_only in
-  List.fold_left (+) 0 odd_cubes
+  let odd_numbers = List.filter (fun x -> x mod 2 <> 0) (List.init (n + 1) (fun i -> i)) in
+  List.fold_left (fun acc x -> acc + (x * x * x)) 0 odd_numbers
 
 (********************************************************************
  * exercise: sum_cube_odd pipeline
